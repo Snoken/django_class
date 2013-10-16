@@ -1,5 +1,6 @@
 # Create your views here.
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
+from django.shortcuts import render
 import datetime
 
 def hello(request):
@@ -7,13 +8,7 @@ def hello(request):
 
 def current_datetime(request):
     now = datetime.datetime.now()
-<<<<<<< HEAD
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
-=======
-    html = "<html><body>It is now %s.</body></html>" % now 
-    return HttpResponse(html
->>>>>>> 89540890be90f8c429e5588b1cfc1ed89c7672cf
+    return render(request, 'current_datetime.html', {'current_date': now})
 
 def hours_ahead(request, offset):
     try:
@@ -21,10 +16,15 @@ def hours_ahead(request, offset):
     except ValueError:
         raise Http404()
     dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
-<<<<<<< HEAD
-    assert False
-    html = "<html><body>In %s hour(s), it will be %s.</body></html>" % (offset, dt)
-=======
+    return render(request, 'hours_ahead.html', {'hour_offset': offset, 'next_time': dt})
+
+
+
+def hours_ahead_old(request, offset):
+    try:
+        offset = int(offset)
+    except ValueError:
+        raise Http404()
+    dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
     html = "<html><body>In %s hour(s), it will be %s.</body></html>" %(offset, dt)
->>>>>>> 89540890be90f8c429e5588b1cfc1ed89c7672cf
     return HttpResponse(html)

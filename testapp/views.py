@@ -1,5 +1,12 @@
-# Create your views here.
-from django.shortcuts import render_to_response
+# Create your views here
+from django.http import HttpResponse
+import datetime
 
-def error404(request):
-	return render(request, '404.html')
+def hello(request):
+	return HttpResponse("Hello world")
+
+def current_datetime(request):
+    now = datetime.datetime.now()
+    html = "<html><body>It is now %s.</body></html> % now
+    return HttpResponse(html)
+

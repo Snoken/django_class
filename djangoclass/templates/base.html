@@ -1,6 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<h1>Hello Tim</h1>
+
+{% load staticfiles %}
+<link rel="stylesheet" type='text/css' href="{% static "css/base.css" %}" >
+
+{% block content_title %}{% endblock %}
+
+
+<ul class="main nav">
+    
+    <a href="{% url 'hello' %}" >Hello</a>
+    <a href="{% url 'timer' %}" >Time</a>
+
+</ul>
+
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
 </head>
 <body>
 </body>
